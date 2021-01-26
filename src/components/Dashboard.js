@@ -1,14 +1,10 @@
 import { Grid, Card, CardContent, Typography, CardActions, CardActionArea, Switch, Slider, Select } from '@material-ui/core'
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { Alert } from '@material-ui/lab';
 import Box from '@material-ui/core/Box';
 import { Notifications } from './Notifications'
 import './Dashboard.css'
 
 export const Dashboard = ({ user, quality, handleQuality, handleToggle, handleVolume, online, volume }) => {
-    let alertBckgrnd 
-    if (!online || volume > 80 || quality === "low") {
-        alertBckgrnd = "tomato"
-    }
     return (
         <>
             <Typography color="textSecondary" variant="h5">
@@ -22,8 +18,6 @@ export const Dashboard = ({ user, quality, handleQuality, handleToggle, handleVo
                 direction="row"
                 justify="center"
                 alignItems="stretch"
-                // alignContent="stretch"
-                // align="center"
             >
             <Grid item>
                 <Card className="Card-style">

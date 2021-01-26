@@ -37,7 +37,6 @@ const App = () => {
 
   const [password, setPassword] = useState('')
   const handlePasswordInput = (e) => {
-    console.log(e.target.value)
     setPassword(e.target.value)
   }
 
@@ -48,7 +47,6 @@ const App = () => {
   }
 
   const stopPlaying = () => {
-    console.log(player)
     Tone.Transport.stop()
   }
 
@@ -82,18 +80,12 @@ const App = () => {
     Tone.Destination.mute = !online
 
     if(quality === "low") {
-      console.log('low')
-      // lowQuality.connect(getDestination())
       Tone.Destination.chain(lowQuality, lowPass, highPass)
     } else if (quality === "normal") {
-      console.log('med')
       Tone.Destination.chain(lowPass2, highPass2)
     } else {
       Tone.Destination.chain()
-      // Tone.getDestination().chain(lowQuality, Tone.Destination)
     }
-
-
   })
 
   const classes = useStyles();
