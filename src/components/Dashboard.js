@@ -83,9 +83,10 @@ export const Dashboard = ({ user, quality, handleQuality, handleToggle, handleVo
                 </Grid>
             </Grid>
             <Typography variant="h5">
-                    {!online ? <div><Notifications/><Alert severity="error">Your application is offline. You won't be able to share or stream music to other devices.</Alert></div> : <div></div>}
-                    {volume > 80 ? <div><Notifications/><Alert severity="warning">Listening to music at a high volume could cause long-term hearing loss.</Alert></div> : <div></div>}
-                    {quality === "low" ? <div><Notifications/><Alert severity="info">Music quality is degraded. Increase quality if your connection allows it.</Alert></div> : <div></div>}
+                    {!online || volume > 80 || quality === "low" ? <Notifications /> : <div></div>}
+                    {!online ? <Alert severity="error">Your application is offline. You won't be able to share or stream music to other devices.</Alert> : <div></div>}
+                    {volume > 80 ? <Alert severity="warning">Listening to music at a high volume could cause long-term hearing loss.</Alert> : <div></div>}
+                    {quality === "low" ? <Alert severity="info">Music quality is degraded. Increase quality if your connection allows it.</Alert> : <div></div>}
             </Typography>
         </>
     )

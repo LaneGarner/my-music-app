@@ -66,6 +66,7 @@ const App = () => {
   const [volume, setVolume] = useState(80)
   const handleVolume = (e, newVol) => {
     setVolume(newVol)
+    console.log('new vol: ', newVol)
   }
 
   const [quality, setQuality] = useState("high")
