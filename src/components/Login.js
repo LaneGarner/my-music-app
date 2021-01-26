@@ -16,7 +16,6 @@ export const Login = ({ user, password, handleNameInput, handlePasswordInput, ha
                     <TextField type="password" value={password} onChange={handlePasswordInput} required className="Input-field" id="password" label="Password" />
                 <Box m="20px">
                     <Button 
-                        // onClick={handleLogin}
                         type="submit"
                         style={{ width:"25vw" }}
                         className="Login-button" 

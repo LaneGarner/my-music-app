@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { AppBar, Typography, Toolbar  } from '@material-ui/core'
+import { AppBar, Typography, Toolbar, Button  } from '@material-ui/core'
 import './App.css';
 import * as Tone from 'tone'
 import StartAudioContext from 'startaudiocontext'
 import rickRoll from './rick-roll.mp3';
 import { Login } from './components/Login'
 import { Dashboard } from "./components/Dashboard";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
 const App = () => {
   const lowQuality = new Tone.BitCrusher(6);
@@ -17,6 +27,7 @@ const App = () => {
   const player = new Tone.Player(rickRoll)
   player.loop = true;
   player.chain(Tone.Destination)
+  
 
 
   const [user, setUser] = useState('')
@@ -33,13 +44,19 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false)
   const handleLogin = (e) => {
       setLoggedIn(!loggedIn)
-      playRickRoll()
+      {!loggedIn ? playRickRoll() : stopPlaying()}
+  }
+
+  const stopPlaying = () => {
+    console.log(player)
+    Tone.Transport.stop()
   }
 
   const playRickRoll = () => {
     StartAudioContext(Tone.context)
     Tone.loaded().then(() => {
-    player.start();
+    player.sync().start();
+    Tone.Transport.start()
     });
   }
 
@@ -79,16 +96,25 @@ const App = () => {
 
   })
 
+  const classes = useStyles();
+
+
+
 
   return (
   <div>
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" >
-          RollPlayer
-        </Typography>
-      </Toolbar>
-    </AppBar>
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            RollPlayer
+          </Typography>
+        {loggedIn && 
+        <Button type="button" onClick={handleLogin} color="secondary" variant="contained">Sign out</Button>
+        }
+        </Toolbar>
+      </AppBar>
+    </div>
     {!loggedIn ? 
     <Login handlePasswordInput={handlePasswordInput} handleNameInput={handleNameInput} user={user} password={password} handleLogin={handleLogin}/> : 
     <Dashboard quality={quality} handleQuality={handleQuality} user={user} online={online} volume={volume} handleToggle={handleToggle} handleVolume={handleVolume} />}
