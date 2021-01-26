@@ -1,4 +1,5 @@
 import { Grid, Card, CardContent, Typography, CardActions, CardActionArea, Switch, Slider, Select } from '@material-ui/core'
+import { Alert, AlertTitle } from '@material-ui/lab';
 import Box from '@material-ui/core/Box';
 import { Notifications } from './Notifications'
 import './Dashboard.css'
@@ -88,9 +89,9 @@ export const Dashboard = ({ user, quality, handleQuality, handleToggle, handleVo
                 </Grid>
             </Grid>
             <Typography variant="h5">
-                    {!online ? <div><Notifications/><Box bgcolor={alertBckgrnd} color="white" pl="30px" py="20px"><Typography>Your application is offline. You won't be able to share or stream music to other devices.</Typography></Box></div> : <div></div>}
-                    {volume > 80 ? <div><Notifications/><Box bgcolor={alertBckgrnd} color="white" pl="30px" py="20px"><Typography>Listening to music at a high volume could cause long-term hearing loss.</Typography></Box></div> : <div></div>}
-                    {quality === "low" ? <div><Notifications/><Box bgcolor={alertBckgrnd} color="white" pl="30px" py="20px"><Typography>Music quality is degraded. Increase quality if your connection allows it.</Typography></Box></div> : <div></div>}
+                    {!online ? <div><Notifications/><Alert severity="error">Your application is offline. You won't be able to share or stream music to other devices.</Alert></div> : <div></div>}
+                    {volume > 80 ? <div><Notifications/><Alert severity="warning">Listening to music at a high volume could cause long-term hearing loss.</Alert></div> : <div></div>}
+                    {quality === "low" ? <div><Notifications/><Alert severity="info">Music quality is degraded. Increase quality if your connection allows it.</Alert></div> : <div></div>}
             </Typography>
         </>
     )
