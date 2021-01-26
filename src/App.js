@@ -85,7 +85,7 @@ const App = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" >
-          My Music App
+          RollPlayer
         </Typography>
       </Toolbar>
     </AppBar>
